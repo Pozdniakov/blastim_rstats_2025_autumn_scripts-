@@ -199,8 +199,8 @@ new_diet <- tribble(
 
 new_diet %>%
   mutate(diff = before_r_course - after_r_course)
-pivot_longer
-pivot_wider
+?pivot_longer
+?pivot_wider
 
 new_diet %>%
   pivot_longer(cols = before_r_course:after_r_course,
@@ -208,3 +208,37 @@ new_diet %>%
                values_to = "weight") %>%
   pivot_wider(names_from = "time",
               values_from = "weight")
+
+powers %>%
+  pivot_longer(cols = !hero_names,
+               names_to = "power",
+               values_to = "has") %>%
+  count(power, has, sort = TRUE) %>%
+  filter(has) %>% View()
+
+powers %>%
+  pivot_longer(cols = !hero_names,
+               names_to = "power",
+               values_to = "has") %>%
+  group_by(power) %>%
+  summarise(n = mean(has)) %>%
+  arrange(desc(n))
+
+powers %>%
+  pivot_longer(cols = !hero_names,
+               names_to = "power",
+               values_to = "has") %>%
+  group_by(hero_names) %>%
+  summarise(n = mean(has)) %>%
+  arrange(desc(n))
+
+powers %>%
+  pivot_longer(cols = !hero_names,
+               names_to = "power",
+               values_to = "has") %>%
+  pivot_wider(names_from = hero_names,
+              values_from = has)
+
+?t
+t(powers) %>% View()
+
