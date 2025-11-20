@@ -1,0 +1,81 @@
+---
+title: "Example of quarto"
+format: html
+editor: visual
+echo: false
+message: false
+warning: false
+bibliography: references.bib
+---
+
+## Цитирование
+
+[@bächinger2017]
+
+## Quarto
+
+**жирный**
+
+1.  Item 1
+2.  Item 2
+3.  Item 3
+    -   Item 3a
+    -   Item 3b
+
+`mean(1:10)` Внутри `r mean(1:10)` абзаца
+
+```{r}
+library(tidyverse)
+iris %>%
+  count(Species)
+```
+
+```{r}
+#| echo: true
+iris %>%
+  group_by(Species) %>%
+  skimr::skim()
+```
+
+Quarto **enables** you *to weave* together content and **executable code** into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+1.  Элемент списка
+
+2.  Второй элемент списка
+
+Пишу дальше
+
+[Ссылка на пандок](https://pandoc.org)
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-qmd-how-it-works.png){fig-align="center" width="600"}
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+## Динамические визуализации
+
+```{r}
+gg_iris <- iris %>%
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width, colour = Species)) +
+  geom_point()
+gg_iris
+```
+
+```{r}
+library(plotly)
+ggplotly(gg_iris)
+```
